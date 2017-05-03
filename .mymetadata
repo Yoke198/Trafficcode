@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="TrafficCode"
+  id="myeclipse.1489543025756"
+  context-root="/trafficcode"
+  j2ee-spec="5.0"
+  archive="TrafficCode.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,194 @@
+
+.title2 {
+	width:170px;
+	height:50px;
+	font-size:20px;
+	margin-left:480px;
+	margin-top:50px;
+
+}
+
+.crossroads {
+}
+
+.cross_div {
+	width:700px;
+	height:700px;
+	float:left;
+	margin-left:100px;
+	margin-bottom:200px;
+	visibility:visible;
+	background-image:url(../images/san.jpg);
+	background-size:cover;
+}
+
+.light {
+	width:26px;
+	height:52.5px;
+	border:3px solid;
+	position:relative;
+	top:283px;
+	left:160px;
+	background:black;
+}
+
+.red {
+	width:20px;
+	height:20px;
+	border-radius:10px;
+	border:solid rgb(20,20,20) 0.2px;
+	margin-top:2px;
+	margin-bottom:2px;
+	background-image:url(../images/greenjt.jpg);
+	background-size:cover;
+	transform:rotate(-271deg);
+}
+
+.yellow {
+	width:20px;
+	height:20px;
+	border-radius:10px;
+	border:solid rgb(20,20,20) 0.2px;
+	margin-top:2px;
+	margin-bottom:2px;
+	background-image:url(../images/greenleftjt.jpg);
+	transform:rotate(-180deg);
+	background-size:cover;
+	position: relative;
+}
+
+
+
+.light2 {
+    width: 26px;
+    height: 52.5px;
+    border: 3px solid;
+    position: relative;
+    top: 410px;
+    left: 215px;
+    background: black;
+    transform: rotate(-90deg);
+}
+
+
+.yellow2 {
+	width:20px;
+	height:20px;
+	border-radius:10px;
+	border:solid rgb(20,20,20) 0.2px;
+	margin-top:2px;
+	margin-bottom:2px;
+	background-image:url(../images/redleftjt.jpg);
+	background-size:cover;
+	position: relative;
+}
+
+.green2 {
+	width:20px;
+	height:20px;
+	border-radius:10px;
+	border:solid rgb(20,20,20) 0.2px;
+	margin-top:2px;
+	margin-bottom:2px;
+	background-image:url(../images/redleftjt.jpg);
+	background-size:cover;
+	transform:rotate(-90deg);
+	position: relative;
+}
+
+.light3 {
+    width: 26px;
+    height: 52.5px;
+    border: 3px solid;
+    position: relative;
+    top: 120px;
+    left: 360px;
+    background: black;
+    transform: rotate(-90deg);
+}
+
+
+.yellow3 {
+	width:20px;
+	height:20px;
+	border-radius:10px;
+	border:solid rgb(20,20,20) 0.2px;
+	margin-top:2px;
+	margin-bottom:2px;
+	background-image:url(../images/redljt.jpg);
+	background-size:cover;
+	position: relative;
+}
+
+.green3 {
+	width:20px;
+	height:20px;
+	border-radius:10px;
+	border:solid rgb(20,20,20) 0.2px;
+	margin-top:2px;
+	margin-bottom:2px;
+	background-image:url(../images/redleftjt.jpg);
+	background-size:cover;
+	transform:rotate(-90deg);
+	position: relative;
+}
+
+.detail {
+	
+	float:left;
+	width:400px;
+	height:500px;
+	margin-left:50px;
+}
+
+.p1 {
+	font-size:17px;
+	margin-bottom:10px;
+}
+
+.p2 {
+	font-size:17px;
+	margin-bottom:10px;
+	width:270px;
+}
+
+.change {
+	width:100px;
+	height:35px;
+	background-color:#418BCA;
+	border:0px;
+	color:white;
+	margin-top:15px;
+	margin-bottom:15px;
+	margin-right: 20px;
+}
+
+.roadTitle {
+	font-size:20px;
+	margin-bottom:23px;
+}
+
+.delete {
+	color:white;
+	background-color:#E15553;
+	padding:8px;
+}
+
+.delete:focus, .delete:hover{
+	color:white;
+	text-decoration:none;
+}
+
+.btn {
+	width:70px;height:35px;font-size:12px;padding-top:3px; border:0;
+}
+
+
+
+
+
+
+
+
+
+

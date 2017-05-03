@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+  
+  <!-- 扫描 -->
+  <context:component-scan base-package="com.lovis.*"></context:component-scan>
+  <!-- 启动注解 -->
+  <mvc:annotation-driven></mvc:annotation-driven>   
+  
+  <mvc:default-servlet-handler />
+  
+  <!-- 配置视图解析器 
+  -->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" /> 
+  	<property name="prefix" value="/WEB-INF/jsp/"></property><!-- /WEB-INF/XX/ -->
+  	<property name="suffix" value=".jsp"></property>
+  	<property name="order" value="2"></property>
+  </bean> 
+   
+  <!-- 配置freemarker视图  --> 
+  <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+  
+  	<property name="viewClass">
+  		<value>org.springframework.web.servlet.view.freemarker.FreeMarkerView</value>
+  	</property>
+  	<property name="suffix" value=".ftl"></property>
+  	<property name="contentType" value="text/html;charset=utf-8"></property>
+  	<property name="order" value="1"></property>
+  	
+  </bean>
+  
+  <!-- 配置freemarker模板 
+  -->
+  <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+  
+  	<property name="templateLoaderPath">
+  		<value>/WEB-INF/ftl</value>
+  	</property>
+  	<property name="defaultEncoding">
+  		<value>utf-8</value>
+  	</property>
+  	
+  </bean>	
+  
+  <!-- 多部分文件上传 -->
+  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+  	<property name="defaultEncoding" value="UTF-8"></property>
+  	<!-- 最大上传2M 单位Byte 1M=1024K 1K=1KB=1024Byte 1Byte=8Bit(位) 1M=1024*1024 -->
+  	<property name="maxUploadSize" value="2097152"></property>
+  	<!-- 懒加载 为了延迟文件解析 以捕获文件大小异常 -->
+  	<property name="resolveLazily" value="true"></property>
+  </bean>
+        
+</beans>
+
+
+
+
+
+
+
+
+

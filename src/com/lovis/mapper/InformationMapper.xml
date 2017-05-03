@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lovis.mapper.InformationMapper">
+	
+	<!-- 登录 -->
+	<select id="getUser" parameterType="com.lovis.model.UserModel" resultType="com.lovis.model.UserModel">
+	
+		select uId uid, uName user, uPassword password from traffic_user where uName = #{user}
+		
+	</select>
+	
+	<!-- 注册 -->
+	<insert id="getResult" parameterType="com.lovis.model.UserModel">
+	
+		insert into traffic_user(uName,uImg,uPassword,uEmail) values(#{user},#{img},#{password},#{email})
+	
+	</insert>
+	
+	<!-- 注册邮箱唯一验证 -->
+	<select id="getEmail" parameterType="java.lang.String" resultType="com.lovis.model.UserModel">
+	
+		select uEmail email from traffic_user email where uEmail = #{email}
+	
+	</select>
+	
+	<!-- 路口详细信息(分页) -->
+	<select id="getCrossRoad" resultType="com.lovis.model.CrossRoadModel">
+	
+		select cross_id crossId,cross_road_name crossRoadName, 
+		cross_green crossGreen, cross_type crossType, 
+		cross_image crossImage, cross_desc crossDesc,
+		shangZgreen,shangZyellow,shangLgreen,shangLyellow,
+		zuoZgreen,zuoZyellow,zuoLgreen,zuoLyellow,
+		xiaZgreen,xiaZyellow,xiaLgreen,xiaLyellow,
+		youZgreen,youZyellow,youLgreen,youLyellow 
+		from crossroads limit #{startPos},#{pageSize}	
+	
+	</select>
+	
+	<!-- 获取总记录数 -->
+	<select id="getTotalCrossRoadCount" resultType="long">
+	
+		select count(*) totalCrossroadCount from crossroads
+	
+	</select>
+	
+	<!-- 搜索 -->
+	<select id="showSearchedProductsByPage" resultType="com.lovis.model.SearchModel">
+	
+		SELECT cross_id crossId, cross_road_name crossRoadName, cross_green crossGreen, cross_type crossType,
+		cross_image crossImage
+ 		FROM crossroads WHERE 1=1
+ 		
+ 		<if test="null!=search">
+ 		AND cross_road_name LIKE CONCAT("%","${search}","%")
+		</if>
+ 		
+ 		LIMIT #{startPos},#{pageSize}	
+	
+	</select>	
+	
+	<!-- 搜索记录总数 -->
+	<select id="getTotalSearchCount" resultType="long">
+		 SELECT COUNT(*) FROM crossroads WHERE 1=1 
+		 
+			<if test="null!=search">
+	 		AND cross_road_name LIKE CONCAT("%","${search}","%")
+	 		</if>
+
+	</select>
+	
+	<!-- 获取详情页面 -->
+	<select id="getRoadDetail" resultType="com.lovis.model.DetailModel">
+	
+		select cross_id crossId, cross_road_name crossRoadName, cross_green crossGreen, 
+		cross_type crossType, cross_image crossImage, cross_desc crossDesc,
+		shangZgreen,shangZyellow,shangLgreen,shangLyellow,
+		zuoZgreen,zuoZyellow,zuoLgreen,zuoLyellow,
+		xiaZgreen,xiaZyellow,xiaLgreen,xiaLyellow,
+		youZgreen,youZyellow,youLgreen,youLyellow 
+		from crossroads where cross_id = #{crossId}
+	
+	</select>
+	
+	<!-- 修改详情页面 -->
+	<update id="ChangeRoadDetail" parameterType="com.lovis.model.ChangeModel">
+		update crossroads 
+			<set>
+			cross_road_name=#{cName},cross_type=#{cType},cross_image=#{cImage},cross_desc=#{cDesc},
+			<if test="null!=shangZgreen">
+			shangZgreen=#{shangZgreen},shangZyellow=#{shangZyellow},shangLgreen=#{shangLgreen},shangLyellow=#{shangLyellow},
+			zuoZgreen=#{zuoZgreen},zuoZyellow=#{zuoZyellow},zuoLgreen=#{zuoLgreen},zuoLyellow =#{zuoLyellow},
+			</if>
+			<if test="null!=xiaZgreen">
+			xiaZgreen=#{xiaZgreen},xiaZyellow=#{xiaZyellow},xiaLgreen=#{xiaLgreen},xiaLyellow =#{xiaLyellow},
+			youZgreen=#{youZgreen},youZyellow=#{youZyellow},youLgreen=#{youLgreen},youLyellow =#{youLyellow}
+			</if>
+			</set>
+			where cross_id =#{cId}
+	
+	</update>
+	
+	<!-- 删除路口 -->
+	<delete id="delectRoad" parameterType="com.lovis.model.ChangeModel">
+	
+		delete from crossroads where
+		<if test="null!=cId">
+		cross_id=#{cId}
+		</if>
+	
+	</delete>	
+	
+	<!-- 添加路口 -->
+	<insert id="addRoad" parameterType="com.lovis.model.ChangeModel">
+	
+		insert into crossroads(cross_id,cross_road_name,cross_type,cross_image,cross_desc,
+		shangZgreen,shangZyellow,shangLgreen,shangLyellow,
+		zuoZgreen,zuoZyellow,zuoLgreen,zuoLyellow,
+		xiaZgreen,xiaZyellow,xiaLgreen,xiaLyellow,
+		youZgreen,youZyellow,youLgreen,youLyellow 	
+		) 
+		values(
+		#{cId,jdbcType=VARCHAR},#{cName,jdbcType=VARCHAR},#{cType,jdbcType=VARCHAR},#{cImage,jdbcType=VARCHAR},#{cDesc,jdbcType=VARCHAR},
+		#{shangZgreen,jdbcType=INTEGER},#{shangZyellow,jdbcType=INTEGER},#{shangLgreen,jdbcType=INTEGER},#{shangLyellow,jdbcType=INTEGER},
+		#{zuoZgreen,jdbcType=INTEGER},#{zuoZyellow,jdbcType=INTEGER},#{zuoLgreen,jdbcType=INTEGER},#{zuoLyellow,jdbcType=INTEGER},
+		#{xiaZgreen,jdbcType=INTEGER},#{xiaZyellow,jdbcType=INTEGER},#{xiaLgreen,jdbcType=INTEGER},#{xiaLyellow,jdbcType=INTEGER},
+		#{youZgreen,jdbcType=INTEGER},#{youZyellow,jdbcType=INTEGER},#{youLgreen,jdbcType=INTEGER},#{youLyellow,jdbcType=INTEGER}
+		)
+	
+	</insert>
+	
+	<!-- 图片登陆 -->
+	<select id="selectUserByImg" resultType="com.lovis.model.UserModel">
+	
+		select uId uid, uName user, uPassword password from traffic_user where uImg=#{img}
+	
+	</select>
+	
+	<!-- 身份证上传 -->
+	<insert id="uploadCard" parameterType="com.lovis.model.CardModel">
+		
+		INSERT INTO idcard(name,gender,idCardNumber,birthday,race,address,uid) 
+		VALUES(#{name}, #{gender}, #{idCardNumber}, #{birthday}, #{race}, #{address}, #{uid})
+		
+	</insert>
+	
+	<!-- 驾照上传 -->
+	<insert id="uploadDriving" parameterType="com.lovis.model.DrivingModel">
+		
+		INSERT INTO driving(address,birthday,gender,issue_date,issued_by,license_number,name,nationality,valid_date,valid_for,version,uid) 
+		VALUES(#{address}, #{birthday}, #{gender}, #{issue_date}, #{issued_by}, #{license_number}, #{name}, #{nationality},#{valid_date,jdbcType=VARCHAR},#{valid_for,jdbcType=VARCHAR},#{version},#{uid})
+		
+	</insert>
+	
+	<!-- 行驶证上传 -->
+	<insert id="uploadDriLicense" parameterType="com.lovis.model.DriLicenseModel">
+		
+		INSERT INTO drilicense(issue_date,vehicle_type,issued_by,vin,plate_no,use_character,address,owner,model,register_date,engine_no,uid) 
+		VALUES(#{issue_date}, #{vehicle_type}, #{issued_by}, #{vin}, #{plate_no}, #{use_character}, #{address},#{owner}, #{models},#{register_date},#{engine_no},#{uid})
+		
+	</insert>
+	
+	<!-- 查看身份证 -->
+	<select id="getCard" resultType="com.lovis.model.CardModel">
+	
+		SELECT id,name,gender,idCardNumber,birthday,race,address FROM idcard WHERE uid = #{uid}
+	
+	</select>
+	
+	<!-- 查看驾照 -->
+	<select id="getDriving" resultType="com.lovis.model.DrivingModel">
+	
+		SELECT id,address,birthday,gender,issue_date,issued_by,license_number,name,nationality,valid_date,valid_for,version 
+		FROM driving 
+		WHERE uid = #{uid}
+	
+	</select>
+	
+	<!-- 查看行驶证-->
+	<select id="getDriLicense" resultType="com.lovis.model.DriLicenseModel">
+	
+		SELECT id,issue_date,vehicle_type,issued_by,vin,plate_no,use_character,address,owner,model models,register_date,engine_no
+		FROM drilicense
+		WHERE uid = #{uid}
+	
+	</select>
+	
+	<!-- 删除身份证 -->
+	<delete id="deleteCard" parameterType="com.lovis.model.CardModel">
+
+		delete from idcard where id=#{id}
+	
+	</delete>
+	
+	<!-- 删除驾照-->
+	<delete id="deleteDriving" parameterType="com.lovis.model.DrivingModel">
+
+		delete from driving where id=#{did}
+	
+	</delete>	
+	
+	<!-- 删除行驶证 -->
+	<delete id="deleteDriLicense" parameterType="com.lovis.model.DriLicenseModel">
+
+		delete from drilicense where id=#{dlid}
+	
+	</delete>	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
