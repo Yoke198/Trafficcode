@@ -36,7 +36,7 @@ public class Page {
     }  
       
     /** 
-     * 取得总页数，总页数=总记录数/总页数 
+     * 取得总页数
      * @return 
      */  
     public int getTotalPageCount() {  
